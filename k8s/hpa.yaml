@@ -1,0 +1,13 @@
+apiVersion: autoscaling/v1
+kind: HorizontalPodAutoscaler
+metadata:
+  name: appointment-creator-service-hpa
+  namespace: ns-appointment-creator-service
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: appointment-creator-service
+  minReplicas: 1
+  maxReplicas: 5
+  targetCPUUtilizationPercentage: 50
