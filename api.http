@@ -1,0 +1,86 @@
+@host=http://localhost:5000
+@tokenPatient=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOjEsInJvbGUiOiJwYXRpZW50IiwiZXhwIjoxNzI5Mzg4NTk3fQ.FUkh_KnBFRfPxfZvyugqjKkJhx52PDkGRDJODxCIAKU
+@tokenDoctor=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOjEsInJvbGUiOiJkb2N0b3IiLCJleHAiOjE3MjkzODg1OTd9.VYDSqbqR4CpjGEyEC_tNmBb8nzEQ909CmDRCevJd8lg
+
+### Health Check
+GET {{host}}/health
+Content-Type: application/json
+
+### Create a Schedule
+POST {{host}}/api/v1/appointments
+Content-Type: application/json
+Authorization: Bearer {{tokenPatient}}
+
+{
+    "schedule_id": 1,
+    "doctor_id": 1,
+    "date_time": "2024-07-22 08:00"
+}
+
+### List Appointments
+GET {{host}}/api/v1/appointments
+Content-Type: application/json
+Authorization: Bearer {{tokenPatient}}
+
+### Get an Appointment by ID
+GET {{host}}/api/v1/appointments/1
+Content-Type: application/json
+Authorization: Bearer {{tokenPatient}}
+
+### Update an Appointment
+PUT {{host}}/api/v1/appointments/5
+Content-Type: application/json
+Authorization: Bearer {{tokenPatient}}
+
+{
+    "schedule_id": 1,
+    "doctor_id": 1,
+    "date_time": "2024-07-22 09:00"
+}
+
+### Confirm an Appointment
+POST {{host}}/api/v1/appointments/1/confirm
+Content-Type: application/json
+Authorization: Bearer {{tokenDoctor}}
+
+{
+    "confirmed": true
+}
+
+### Create a Feedback
+POST {{host}}/api/v1/appointments/1/feedbacks
+Content-Type: application/json
+Authorization: Bearer {{tokenPatient}}
+
+{
+    "rating": 5,
+    "comment": "Great appointment"
+}
+
+### List Feedbacks
+GET {{host}}/api/v1/appointments/1/feedbacks
+Content-Type: application/json
+Authorization: Bearer {{tokenPatient}}
+
+### Get a Feedback by ID
+GET {{host}}/api/v1/appointments/1/feedbacks/1
+Content-Type: application/json
+Authorization: Bearer {{tokenPatient}}
+
+### Upload a File
+POST {{host}}/api/v1/files
+Content-Type: multipart/form-data; boundary=WebAppBoundary
+Authorization: Bearer {{tokenPatient}}
+
+--WebAppBoundary
+Content-Disposition: form-data; name="file"; filename="test.pdf"
+Content-Type: application/pdf
+Content-Transfer-Encoding: binary
+
+<%= File.read('test.pdf') %>
+--WebAppBoundary--
+
+### List Files
+GET {{host}}/api/v1/files
+Content-Type: application/json
+Authorization: Bearer {{tokenPatient}}

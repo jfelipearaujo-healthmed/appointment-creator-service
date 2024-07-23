@@ -1,0 +1,21 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: appointment-creator-service-ingress
+  namespace: ns-appointment-creator-service
+  annotations:
+    nginx.ingress.kubernetes.io/backend-protocol: "HTTP"
+    nginx.ingress.kubernetes.io/use-regex: "true"
+    nginx.ingress.kubernetes.io/rewrite-target: /$2
+spec:
+  ingressClassName: nginx
+  rules:
+    - http:
+        paths:
+          - path: /appointment-creator-service(/|$)(.*)
+            pathType: ImplementationSpecific
+            backend:
+              service:
+                name: appointment-creator-service
+                port:
+                  number: 5000
