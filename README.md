@@ -35,35 +35,6 @@ make destroy
 
 The automated deployment is triggered by a GitHub Action.
 
-# Consume Appointment Events
-
-## CreateAppointment - Success flow
-- [ ] Consume queue
-- [ ] Check if the appointment is already created
-- [ ] If not, create the appointment
-- [ ] Update the event with success status
-- [ ] Delete the message from the queue
-
-## CreateAppointment - Error flow
-- [ ] Consume queue
-- [ ] Check if the appointment is already created
-- [ ] If yes, update the event with error status
-- [ ] Delete the message from the queue
-
-## UpdateAppointment - Success flow
-- [ ] Consume queue
-- [ ] Check if the appointment can be re-scheduled
-- [ ] If yes, update the appointment with the new date
-- [ ] Update the event with success status
-- [ ] Delete the message from the queue
-
-## UpdateAppointment - Error flow
-- [ ] Consume queue
-- [ ] Check if the appointment can be re-scheduled
-- [ ] If no, cancel the appointment
-- [ ] Update the event with error status
-- [ ] Delete the message from the queue
-
 # License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.

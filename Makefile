@@ -189,6 +189,10 @@ test: ## Test the application
 	@echo "Testing..."
 	@go test -race -count=1 ./internal/... -coverprofile=coverage.out
 
+test-queue: ## Test the queue
+	@echo "Testing queue..."
+	@./scripts/tests/send-message.sh
+
 test-bdd: ## Run BDD tests
 	@echo "Running BDD tests..."
 	@go test -count=1 ./tests/... -test.v -test.run ^TestFeatures$
