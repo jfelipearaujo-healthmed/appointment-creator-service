@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: appointment-creator-service
-  namespace: ns-appointment-creator-service
+  namespace: ns-appointment-creator
 spec:
   replicas: 1
   selector:
@@ -11,14 +11,14 @@ spec:
   strategy:
     type: RollingUpdate
     rollingUpdate:
-      maxSurge: 1
-      maxUnavailable: 0
+      maxSurge: 0
+      maxUnavailable: 1
   template:
     metadata:
       labels:
         app: appointment-creator-service
     spec:
-      serviceAccountName: sa-appointment-creator-service
+      serviceAccountName: sa-appointment-creator
       containers:
         - name: appointment-creator-service
           image: jsfelipearaujo/appointment-creator-service:latest

@@ -26,6 +26,9 @@ build: ## Build the application to the output folder (default: ./buil/main)
 	@echo "Building..."	
 	@go build -race -o build/main cmd/api/main.go
 
+local-deploy: ## Deploy the application locally
+	make docker-build && make docker-push && make k8s-deploy
+
 docker-build: ## Build a container image and add the version and latest tag
 	@if command -v docker > /dev/null; then \
 		echo "Building..."; \

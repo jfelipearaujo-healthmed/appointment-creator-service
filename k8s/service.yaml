@@ -2,7 +2,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: appointment-creator-service
-  namespace: ns-appointment-creator-service
+  namespace: ns-appointment-creator
   labels:
     app: appointment-creator-service
 spec:
