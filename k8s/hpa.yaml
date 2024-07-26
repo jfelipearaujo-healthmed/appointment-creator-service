@@ -2,7 +2,7 @@ apiVersion: autoscaling/v1
 kind: HorizontalPodAutoscaler
 metadata:
   name: appointment-creator-service-hpa
-  namespace: ns-appointment-creator-service
+  namespace: ns-appointment-creator
 spec:
   scaleTargetRef:
     apiVersion: apps/v1

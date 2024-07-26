@@ -42,7 +42,7 @@ func (svc *Service) ConsumeMessages(ctx context.Context) {
 	output, err := svc.client.ReceiveMessage(ctx, &sqs.ReceiveMessageInput{
 		QueueUrl:            &svc.QueueUrl,
 		MaxNumberOfMessages: 10,
-		WaitTimeSeconds:     30,
+		WaitTimeSeconds:     20,
 	})
 	if err != nil {
 		slog.ErrorContext(ctx, "error receiving message from queue", "queue_url", svc.QueueUrl, "error", err)
