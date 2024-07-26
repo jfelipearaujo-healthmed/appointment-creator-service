@@ -8,7 +8,6 @@ import (
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
 
-	"github.com/jfelipearaujo-healthmed/appointment-creator-service/internal/core/domain/entities"
 	"github.com/jfelipearaujo-healthmed/appointment-creator-service/internal/core/infrastructure/config"
 	"github.com/jfelipearaujo-healthmed/appointment-creator-service/internal/core/infrastructure/shared/logger"
 	slogGorm "github.com/orandin/slog-gorm"
@@ -38,13 +37,6 @@ func (svc *DbService) Connect(config *config.Config) error {
 		Logger: gormLogger,
 	})
 	if err != nil {
-		return err
-	}
-
-	if err := conn.AutoMigrate(
-		&entities.Event{},
-		&entities.Appointment{},
-	); err != nil {
 		return err
 	}
 
