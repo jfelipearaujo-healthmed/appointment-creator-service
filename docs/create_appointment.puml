@@ -1,0 +1,24 @@
+@startuml create_appointment
+
+title Criação de Consulta
+
+queue "Appointment Queue" as queue
+participant "Appointment Creator Service" as appointment_service
+participant "Database" as database
+
+activate appointment_service
+queue <- appointment_service : Consome os eventos da fila
+queue --> appointment_service : Retorna o evento
+appointment_service -> appointment_service : Analisa se o evento é de criação\nou atualização de consulta
+appointment_service -> database : Busca os dados da consulta
+database --> appointment_service : Retorna os dados da consulta
+appointment_service -> appointment_service : Analisa a disponibilidade de agendamento
+appointment_service -> appointment_service : Cria o agendamento
+appointment_service -> database : Salva o agendamento
+database --> appointment_service : Agendamento salvo
+appointment_service -> database : Atualiza o status do evento
+database --> appointment_service : Evento atualizado
+appointment_service -> queue : Deleta a mensagem da fila
+deactivate appointment_service
+
+@enduml
