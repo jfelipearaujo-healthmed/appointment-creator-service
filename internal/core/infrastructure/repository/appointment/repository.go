@@ -59,7 +59,7 @@ func (rp *repository) Create(ctx context.Context, appointment *entities.Appointm
 func (rp *repository) Update(ctx context.Context, userID uint, appointment *entities.Appointment) (*entities.Appointment, error) {
 	tx := rp.dbService.Instance.WithContext(ctx)
 
-	if err := tx.Model(appointment).Where("patient_id = ? AND id = ?", userID, appointment.ID).Updates(appointment).Error; err != nil {
+	if err := tx.Model(appointment).Where("patient_id = ? AND id = ?", userID, appointment.ID).Save(appointment).Error; err != nil {
 		return nil, err
 	}
 

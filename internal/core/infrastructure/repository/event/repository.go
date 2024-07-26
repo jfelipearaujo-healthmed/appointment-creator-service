@@ -74,7 +74,7 @@ func (rp *repository) Create(ctx context.Context, event *entities.Event) (*entit
 func (rp *repository) Update(ctx context.Context, event *entities.Event) (*entities.Event, error) {
 	tx := rp.dbService.Instance.WithContext(ctx)
 
-	if err := tx.Model(event).Where("message_id = ?", event.MessageID).Updates(event).Error; err != nil {
+	if err := tx.Model(event).Where("message_id = ?", event.MessageID).Save(event).Error; err != nil {
 		return nil, err
 	}
 
